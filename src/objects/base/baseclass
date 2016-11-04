@@ -1,0 +1,9 @@
+base class plans
+
+- debug for inspection as needed
+debug(){
+    debugger;
+}
+
+- ui base class
+keybinding method

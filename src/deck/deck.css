@@ -1,0 +1,64 @@
+
+
+
+/* edit page */
+input{
+    border:none;
+    border-bottom:1px solid green;
+}
+
+.deck-edit{
+    width: 100%;
+    max-width:700px;
+}
+
+.deck-edit header input{
+    font-size: 1.2em;
+    max-width: 400px;
+    width: 100%;
+}
+
+.deck-edit description input{
+    font-size:1.1em;
+    max-width:600px;
+    width: 100%;
+}
+
+/* input should by styled somewhere okay? */
+
+.add-table textarea{
+    width:95%;
+}
+
+.edit-table textarea{
+    width:95%;
+    border:none;
+}
+
+.align-top td{
+    vertical-align: top;
+}
+
+textarea.txa-no-padding{
+    padding-top:0;
+    margin-bottom:0;
+}
+
+@media screen and (max-width:600px){
+    
+    .small-responseive-no-head thead{
+        display:none;
+    }
+
+    .small-responsive-no-head tr{
+        display: flex;
+        flex-direction:column;
+    }
+
+    td:last-child{
+        padding-top:0;
+        text-align:right;
+        margin-bottom:2em;
+    }
+
+}

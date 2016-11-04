@@ -1,0 +1,77 @@
+<template>
+
+  <require from="./deck.css"></require>
+
+  
+  <div class="col s12">
+
+    <button md-button click.trigger="router.navigateToRoute('decks')">Back</button>    
+    <button md-button click.trigger="saveDeck()">Save Changes</button>
+    <button md-button click.trigger="router.navigateToRoute('import')">Import Questions</button>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input  id="deck_name" type="text" value.bind="deck.name"
+            class="validate">
+        <label for="deck_name" class="active">Deck Name</label>
+      </div>
+      <div class="input-field col s12">
+        <input id="deck_description" type="text" value.bind="deck.description"
+            class="validate active">
+        <label for="deck_description" class="active">Deck Description</label>
+      </div>
+    </div>
+
+    <p>${deck.cards.length} Cards</p> 
+
+
+  <ul md-collapsible="accordion: true;" class="card-panel " >
+    <li>
+      <div class="collapsible-header">Add Card</div>
+      <div class="collapsible-body">
+        
+          <div class="form-group" >
+            <label for="new_question">Question</label>
+            <textarea id="new_question" class="materialize-textarea"
+              value.bind="new_question & validate"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-group" for="new_answer">Answer</label> 
+            <textarea id="new_answer" class="materialize-textarea"
+                value.bind="new_answer & validate"></textarea>
+          </div>
+  
+          <button md-button click.trigger="saveNewCard()">Save Card</button>
+
+      </div>
+    </li>
+  </ul>
+  
+
+    <table class="bordered small-responsive-no-head align-top">
+      
+      <thead>
+        <tr> <th>#</th> <th>Question</th> <th>Answer</th> <th></th </tr>        
+      </thead>
+     
+      <tbody>
+        <tr repeat.for="card of deck.cards" > 
+          <td >Card ${card.number}</td>
+          <td >
+              <textarea value.bind="card.question" class="materialize-textarea txa-no-padding"></textarea>
+          </td>
+          <td >
+               <textarea value.bind="card.answer" class="materialize-textarea txa-no-padding"></textarea>
+          </td>
+          <td >
+            <a href="#" click.trigger="remove(card)">Delete</a>
+          </td>
+        </tr>        
+      </tbody>
+
+    </table>
+
+   </div>
+
+</template>

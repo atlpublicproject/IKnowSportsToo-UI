@@ -1,0 +1,164 @@
+<template>
+
+  <require from="./deck.css"></require>
+
+  
+    <div class="row">
+
+    <button md-button click.trigger="router.navigateToRoute('decks')">Back</button>    
+    <button md-button click.trigger="saveDeck()">Save Changes</button>
+
+    </div>
+
+    <div class="card">    
+    <div class="card-content">
+
+    <span class="card-title">Import Data</span>
+    <div class="row">
+
+    <!-- import fields-->
+    <div class="col s12">
+  
+      <!--<div class="row">-->
+        <div class="input-field col s6">
+         <textarea placeholder="Paste Table Data From Excel (optional)" 
+            class="materialize-textarea" value.bind="past" id="pasteImport" rows="1" style="max-height:1em; padding:0;" paste.trigger="pasteImport_OnPaste($event)"></textarea>
+        </div>
+
+        <div class="input-field col s6">
+          <input type="checkbox" id="transposePaste" checked.bind="isDataRowBased" />
+          <label for="transposePaste">Transpose</label>
+        </div>
+
+    </div>
+
+    <div class="col s12">
+      <label for="importText">Text</label>
+      <textarea value.bind="importText" id="importText" rows="6" style="height:auto"
+                input.trigger="importText_Change()"></textarea>
+    </div>
+
+    <div class="col s4 m4 ">
+    <label for="format">Format</label>
+    <select md-select value.bind="importFormat" id="format" change.call="tryShowSampleData()">
+        <option value="csv">CSV</option>       
+        <option value="json">JSON </option>         
+    </select>
+    </div>
+
+    <div class="col s4 m4 ">
+      <label for="content">Content</label>
+      <select md-select value.bind="importContent" id="content" change.call="tryShowSampleData()">
+        <option value="qa">Question & Answer</option>       
+        <option value="table">Table or Object Data</option>       
+      </select>
+    </div>
+
+    <div class="col s4 m4 input-field ">
+        <input type="checkbox" id="shouldShowSampleData" checked.bind="shouldShowSampleData"
+          change.trigger="showSampleDataChange($event)" />
+          <label for="shouldShowSampleData">Show Sample Data</label>
+    </div>
+
+    </div>
+    <!--end row-->
+
+    <div class="row">
+
+
+    <div class="input-field col s12">
+     
+      <button md-button click.trigger="parseData()">Parse Data</button>
+
+    </div>
+
+  
+
+    </div> <!-- end row -->
+</div> <!-- end card body -->
+</div> <!-- end card -->
+
+<div class="card" show.bind="importContent == 'table'">
+
+  <div class="card-content">
+
+      <span class="card-title">Create Templates</span>
+
+      <br />
+        <button md-button click.trigger="addTemplate()">Add Template</button>          
+      <br />
+          
+          <div class="row" repeat.for="t of importTemplates">
+
+            <!-- Labels for import options -->      
+            <div class="input-field col s8">
+              <input id="template_q" type="text" value.bind="t.q">
+              <label for="template_q" class="active">Question Template</label>
+            </div>
+
+            <div class="input-field col s2">
+              <input id="template_filter" type="text" value.bind="t.filter">
+              <label for="template_filter" class="active">Filter</label>
+            </div>
+
+            <div class="input-field col s2">
+              <input id="template_group_by" type="text" value.bind="t.group">
+              <label for="template_group_by" class="active">Group By</label>
+            </div>
+          
+            <div class="input-field col s8">
+              <input id="template_a" type="text" value.bind="t.a">
+              <label for="template_a" class="active">Answer Template</label>
+            </div>
+
+            <div class="input-field col s2">
+              <input id="template_multi_row"  type="text" value.bind="t.multi">
+              <label for="template_multi_row" class="active">Row Depth</label>
+            </div>
+
+            <div class="input-field col s2">
+              <a class="btn-flat" click.trigger="removeTemplate(t)">Remove</a>
+            </div>
+          </div>
+
+      
+
+        </div>
+       
+        <!--<button md-button click.trigger="doFootBallData()">Do Football Data</button>-->
+     
+
+  </div> <!-- end card content -->
+</div> <!-- end card -->
+
+<!-- begin question / answer cards  -->
+<div class="card">
+  <div class="card-content">
+
+
+    <button md-button click.trigger="createCards()" disabled.bind="!enableCreateCards">Create Cards</button>
+    <button md-button click.trigger="saveCards()" disabled.bind="cards.length == 0">Save Cards</button>
+    <button md-button click.trigger="clearCards()" disabled.bind="cards.length == 0">Clear Cards</button>
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="card of cards">
+        <td>${card.question}</td>
+        <td>${card.answer}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br />
+
+  </div> <!-- end card content -->
+</div> <!-- end card -->
+<!-- end question answer cards  -->
+
+
+</template>

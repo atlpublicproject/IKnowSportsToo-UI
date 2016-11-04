@@ -1,0 +1,152 @@
+
+ body{
+    font-family: Arial, Helvetica, sans-serif;
+ }
+
+
+ #game-container{
+     text-align: left;
+     max-width:550px;
+     position:relative;
+ }
+
+ #cardEl {   
+   margin-right:0;
+   padding:1em;
+   font-size:16px;
+   border-radius:2px;
+   text-align: left;
+   overflow:hidden;
+   padding-bottom:1.5em;
+ }
+
+ #flag{
+     position:absolute;
+     top:0;
+     right:0;
+     background: none;
+     z-index: 1;
+     margin:0;
+     padding : .2em;
+ }
+
+ #flag.active{
+     /*color:orangered;*/
+     color: hotpink;
+ }
+
+ /*#flag.active code{
+     color:orangered;      
+ }*/
+
+ #flag span{
+     line-height: 22px;
+     font-size:22px;
+ }
+ #flag code {
+     line-height: 25px;
+     vertical-align: top;
+ }
+
+ #number{
+     padding:0px 5px;
+     margin-top:-5px;
+     position:absolute;
+     right: 0;
+     opacity: .5;
+ }
+
+ #card-actions button.active{
+     border:1px solid hotpink; 
+ }
+
+ .tap-action{
+    font-size: 20px;
+    font-weight: bold;
+    opacity: .1;
+ }
+
+ help{
+    margin-left:2px;
+    font-size: 14px;
+ }
+ button code{
+     color:darkcyan;
+     font-size:14px;
+ }
+
+ #MoreButtons{
+   width:100%;
+   padding:.3em;
+   display: inline-flex;
+   flex-direction: column;
+   align-items: baseline;
+ }
+
+ /* small screen logic */
+ @media screen and (max-width:600px){
+
+     #game-container{
+        text-align: center;
+     }
+
+     #scoreboard{
+         flex-direction: column;
+         align-items: center;  
+         margin:0 auto;
+     }
+
+     #scoreboard > *{
+        width:100%;
+        margin:.2em .3em;
+     }
+
+     #prev-next{
+         display:inline-flex;        
+     }
+
+    #MoreButtons{
+        align-items:stretch;
+    }
+
+    #prev-next button{
+        margin:.2em;
+        flex: 1;
+     }
+     #prev-next button:first-of-type{ margin-left:0; }
+     #prev-next button:last-of-type{ margin-right:0; }
+
+     #card-actions button{
+         padding:0 .8em;
+     }
+ }
+
+
+
+#commands-table table{
+    font-size:12px;    
+    margin:1em;
+    width:calc(100% - 2em);
+    max-width:800px;
+}
+
+#commands-table td:nth-of-type(1){
+    font-weight: bold;
+}
+
+#commands-table td:nth-of-type(2){
+    font-family: monospace;    
+}
+
+#commands-table{
+    top:0; bottom:0; left:0; right:0; opacity:.95; background-color:white; position:absolute; z-index:2;
+}
+
+ @media screen and (max-width:600px){
+     #commands-table th:nth-of-type(2),
+     #commands-table th:nth-of-type(3),
+     #commands-table td:nth-of-type(2),
+     #commands-table td:nth-of-type(3){
+         display: none;
+     }
+ }

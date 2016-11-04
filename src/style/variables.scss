@@ -1,0 +1,35 @@
+/* created to : contain all variables... inlcuding
+
+> color
+> layout 
+> x
+
+*/
+
+$main-theme-color : #333; // change this to rgb or hsl
+
+
+$sass-pink: hsl(330, 50%, 60%);
+$main-accent-color: $sass-pink;
+
+
+
+$font-stack: ( 'Arial', 'Helvetica', sans-serif);
+
+//breakpoints - screen
+$small:767px;
+$medium:992px;
+$large:1200px;
+
+
+
+// Append Example
+//$shadows: append($shadows, $shadow, comma);
+
+/* 
+.foo {
+  &-bar {
+    color: red;
+  }
+}
+*/

@@ -1,0 +1,23 @@
+
+/* fade in/out transition */
+.fade{
+    transition: opacity ease-in-out .1s;
+
+    &-out{
+    opacity: .5;
+    }
+
+    &-in{
+        opacity: 1;
+    }
+}
+
+
+/* all purpose */
+.is-toggle{
+    cursor:pointer;
+}
+
+
+
+

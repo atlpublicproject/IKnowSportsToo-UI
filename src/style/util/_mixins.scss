@@ -1,0 +1,75 @@
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+
+// ---- break ; layout mixins ----- //
+//layouts
+$breakpoints: (
+  'small': $small,
+  'medium': $medium,
+  'large': $large
+);
+
+/// respond-to break points
+/// enforce rules when screen is greater than a range
+@mixin respond-to($breakpoint) { 
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: #{map-get($breakpoints, $breakpoint)}) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+/* sample use
+// _component.scss
+.element {
+  color: hotpink;
+
+  @include respond-to(small) {
+    color: tomato;
+  }
+}
+*/
+
+@mixin table-column-styles($headersToo, $columns...){
+  
+  @for $i from 1 through length($columns)
+  {
+    @if $headersToo{
+      td:nth-of-type-#{$i},
+      th:nth-of-type-#{$i}{
+        $col-map : nth( $columns, $i );
+        @each $prop, $val in $col-map{
+          #{$prop} : #{$val};
+        }
+      }
+    }else{
+       td:nth-of-type-#{$i}{
+        $col-map : nth( $columns, $i );
+        @each $prop, $val in $col-map{
+          #{$prop} : #{$val};
+        }
+      }
+    }
+  }
+}

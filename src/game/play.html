@@ -1,0 +1,138 @@
+<template>
+  <require from="./play.css"></require>
+  <require from="./commandstable.html"></require>
+
+  <div class="row">
+
+  <button md-button click.trigger="goToIndex()" >Back</button>    
+  <button md-button click.trigger="saveGame()">Save Game</button>    
+  <button md-button click.delegate="goToReview()">Review All<code>(r)</code></button>
+
+
+  <h1>${ deck.name }</h1>
+
+  <!-- Controls -->
+
+  <div class="col s12 m12 l8">
+
+  <!-- Play Game -->
+  <div id="game-container">
+
+  <!--Card -->
+  <div id="cardEl" if.bind="card"
+    hammer-swipe.call="handleSwipe($event)"
+    hammer-tap.call="handleTap($event)"
+    class="card s-fade ${ isInTransition ? 's-fade-out' : 's-fade-in'} ${ card.isFlagged ? 'flag' : '' }">
+    
+
+     ${ card.question }
+
+      
+    <span show.bind="!card.isAnswerVisible">
+      <br />
+      <br />
+      <br />
+      <p>
+        <span class="tap-action" >Tap to Reveal <code>(s)</code></span>
+      </p>
+    </span>
+    
+    <div show.bind="card.isAnswerVisible" id="answer">
+    
+      <br />
+      ${ card.answer }
+
+      <br />
+      <br>
+
+      <div id="card-actions">
+        <button id="Right" focus.one-way="card.isAnswerVisible" class="${card.response == 1 ? 'active' : ''} waves-effect waves-teal btn-flat" 
+          click.delegate="right()" title="I got this right (y)">
+          ✔<help>Right<code>(y)</code></help></button>
+        <button id="Wrong" class="${card.response == 2 ? 'active' : ''} waves-effect waves-teal btn-flat" 
+          click.delegate="wrong()" title="I got this wrong (n)">
+          ❌<help>Wrong<code>(n)</code></help></button>
+        <button id="Pass"  class="${card.response == 3 ? 'active' : ''} waves-effect waves-teal btn-flat"
+          click.delegate="pass()"  title="Skip Judgement (p)">
+          〰️<help>Hmm<code>(p)</code></help></button>
+      </div>
+  
+      </div>
+
+      <div id="number">
+         <strong> ${ card.number } </strong> / ${ deck.cards.length }
+      </div>
+ 
+      <!-- flag -->
+      <button  hammer-tap.call="flag($event)" id="flag" title="Flag Question (f)" class="${card.isFlagged ? 'active' : ''} waves-effect waves-teal btn-flat"> 
+        <span show.bind="card.isFlagged">
+          <help>Unflag<code>(f)</code></help>
+          &#x2691;
+        </span>
+        <span show.bind="!card.isFlagged">
+          <help>Flag<code>(f)</code></help>
+          &#x2690;
+      </span>    
+      </button>
+
+
+  <!-- end card-->
+  </div>
+
+
+   <div id="scoreboard" >
+      
+     
+    <!-- end score board -->
+  </div>
+
+  <!-- end card container -->
+  </div>
+
+  <!-- end game container-->
+  </div>
+
+
+  <div class="col s12 m12 l4">
+
+    <!-- More Button Options -->
+    <div id="MoreButtons">
+
+      <!-- Deck Controls -->      
+      <span id="prev-next">
+        <button id="prev" click.delegate="previous()" class="waves-effect waves-teal btn-flat" >
+            Prev <code>(&larr;)</code>
+        </button>        
+        <button id="next" click.delegate="next()" class="waves-effect waves-teal btn-flat">
+            Next <code>(&rarr;)</code>
+        </button>
+      </span>
+
+
+    <button click.trigger="showCommands=!showCommands"
+    class="waves-effect waves-teal btn-flat">Show Commands <code>(h)</code></button>
+
+    <button class="waves-effect waves-teal btn-flat" click.trigger="clearAnswers()">Clear Answers</button>    
+
+    <button class="waves-effect waves-teal btn-flat" click.trigger="clearAnswersHistory()">Reset Deck</button>    
+
+
+    </div>
+
+  </div>
+
+
+  <!-- end row -->
+  </div>
+
+
+  <!-- commands table -->
+  <div id="commands-table" show.bind="showCommands" click.trigger="showCommands=!showCommands">
+
+     <commandstable></commandstable>
+  </div>
+
+  <!-- end sleeve -->
+  </div>
+
+</template>

@@ -1,0 +1,70 @@
+@charset 'utf-8';
+
+
+@import 'style/all';
+
+
+@import './deck/deck.scss';
+
+
+/* materialize add-on styles */
+
+.card.tiny{    
+    position: relative;
+    height:185px;
+}
+
+.card.tiny .card-content{
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.card.tiny .card-action{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+@media screen and ( max-width:600px ){
+    .card.tiny{
+        box-shadow: none;
+        border-top:1px solid grey;
+        border-left:none;
+        border-right:none;
+        border-radius: 0;
+        margin:0;
+    }
+
+    .card.tiny .card-action{
+        padding:10px 20px;
+    }
+}
+
+#MainContainer{
+
+    // @media screen and ( max-width:600px ){
+    //     width:100%;       
+    //     overflow:hidden;
+    // }
+    
+}
+
+/*
+Class : .sm-full
+Created to : negate the padding and margin of the container and column on small screens
+Sets direct row decendants of a container to full width
+*/
+@media screen and ( max-width:600px ){
+
+    .container .row.sm-full {
+        margin-left:0;
+        margin-right:0;
+        margin:0 -5%;
+    }
+
+    .container .row.sm-full > .col.s12{
+            padding-left:0;
+            padding-right:0;        
+    }
+}

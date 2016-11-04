@@ -1,0 +1,19 @@
+
+/* form validation */
+
+.form-group{
+
+    &.has-error{
+
+        textarea, input{
+            border-color:red;
+        }
+
+     
+        .validation-message{
+            color:red;
+        }
+    
+    } 
+
+}

@@ -1,0 +1,55 @@
+<template>
+
+<require from="./deck.css"></require>
+
+
+
+  <div class="row">
+    <form class="col s10 offset-s1 m12">
+        
+        <div class="row">
+
+        <div class="input-field col s12 m6">          
+          <i class="material-icons prefix">Q</i>
+          <input id="search" type="text" placeholder="search" value.bind="searchText" focus>
+        </div>
+
+        <div class="input-field col s8 m4">
+          <select md-select value.two-way="searchLocation">
+              <option value="local">My Decks</option>
+              <option value="remote">All Decks</option>            
+          </select>
+        </div>  
+        
+        <div class="input-field col s4 m2">
+          <button md-button click.trigger="search()">Go</button>
+        </div>
+
+        </div>    
+
+    </form>
+  </div>    
+  
+  <div class="row sm-full">
+    <div class="s12 m6 col" repeat.for="deck of decks">        
+        <div class="card tiny">
+          <div class="card-content ">
+            <span class="card-title">${deck.name}</span>
+            <p>${ deck.description }</p>
+          </div>
+          <div class="card-action">
+              <a href="#" click.trigger="goToEdit( deck.id )">Edit</a>
+              <a href="#" click.trigger="goToPlay( deck.id )">Play</a>
+              <a href="#" click.trigger="deleteDeck( deck.id )">Delete</a>
+          </div>
+        </div>      
+    </div>
+  </div>
+  
+  <div class="row">
+  <p class="col m12">
+    <button md-button href="#" click.trigger="goToNew()">Create New Deck</button>
+  </p>
+  </div>
+
+</template>

@@ -1,0 +1,29 @@
+<template>
+
+  <require from="./app.css"></require>
+
+
+  <!-- Page Content goes here -->
+
+ 
+  <header>
+    <nav>
+      <div class="container nav-wrapper">
+        <a href="#" class="brand-logo right">I Know Sports Too</a>      
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <li><a repeat.for="route of router.navigation" href.bind="route.href">${route.title}</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container" id="MainContainer">
+
+    <router-view></router-view>
+
+  </div>
+
+  <require from="materialize-css/css/materialize.css"></require>
+
+ 
+</template>

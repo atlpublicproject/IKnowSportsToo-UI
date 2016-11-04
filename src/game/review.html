@@ -1,0 +1,67 @@
+<template>
+
+ <require from="./review.css"></require>
+
+ <div class="col s12">
+
+ <button md-button click.delegate="goToGame()"><code>(&#9003;)</code> Back to Game </button>
+
+ <h1>Review</h1>
+ 
+ <ul md-collapsible="accordion: false;">
+    <li>
+      <div class="collapsible-header active">Questions</div>
+      <div class="collapsible-body">
+
+        <table id="review-table"> 
+          <thead>
+            <th>Question</th>   
+            <th>Mark</th>
+            <th>✔ /❌ / 〰️ </th>   
+            <th>#</th>
+            <th>⚑</th>
+          </thead>
+        
+          <tbody>
+            <tr repeat.for="card of deck.cards">
+              <td><div class="question">${card.question}</div><div class="answer">${card.answer}</div></td>
+              <td>
+                <span if.bind="card.response == 1">✔</span>
+                <span if.bind="card.response == 2">❌</span>
+                <span if.bind="card.response == 3">〰️</span>                
+              </td>              
+              <td>${card.rightCount} / ${card.wrongCount} / ${card.skipCount}</td>
+              <td>${card.number} </td>
+              <td> <span show.bind="card.isFlagged" style="color:hotpink"> &#x2691;</span></td>
+            </tr>
+          </tbody>
+       </table>
+        
+    </div>
+    </li>
+    <li>
+      <div class="collapsible-header">Score Totals</div>
+      <div class="collapsible-body">
+
+           <p>    
+              <strong title="% answered correct at least once">${ ((correctAtLeastOnceCount * 100.0 / questionCount) + 0.0 ) | decimalNumber:'0'}% correct </strong> 
+
+              <br>
+           </p>
+
+      
+            <ul class="cb-pads">      
+            <li>${questionCount} Questions
+            <li>${correctAtLeastOnceCount} answered right
+            <li>${neverCorrectCount} wrong
+            <li>${noJudgementCount} skipped
+            </ul>    
+          
+         
+      </div>  
+   </li> 
+ </ul>
+  
+</div>
+
+</template>

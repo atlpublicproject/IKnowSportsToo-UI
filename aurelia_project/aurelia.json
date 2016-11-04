@@ -1,0 +1,264 @@
+{
+  "name": "I Know Sports Too",
+  "type": "project:application",
+  "platform": {
+    "id": "web",
+    "displayName": "Web",
+    "output": "scripts",
+    "index": "index.html"
+  },
+  "transpiler": {
+    "id": "typescript",
+    "displayName": "TypeScript",
+    "fileExtension": ".ts",
+    "dtsSource": [
+      "./typings/**/*.d.ts",
+      "./custom_typings/**/*.d.ts"
+    ],
+    "source": "src\\**\\*.ts"
+  },
+  "markupProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".html",
+    "source": "src\\**\\*.html"
+  },
+  "cssProcessor": {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".css",
+    "source": "src\\**\\*.css"
+  },
+  "scssProcessor" : {
+    "id": "none",
+    "displayName": "None",
+    "fileExtension": ".scss",
+    "source": [  "src\\style\\all.scss",
+                 "src\\app.scss",
+                 "src\\**\\*.css"] 
+  },
+  "editor": {
+    "id": "vscode",
+    "displayName": "Visual Studio Code"
+  },
+  "unitTestRunner": {
+    "id": "karma",
+    "displayName": "Karma",
+    "source": "test\\unit\\**\\*.ts"
+  },
+  "paths": {
+    "root": "src",
+    "resources": "src\\resources",
+    "elements": "src\\resources\\elements",
+    "attributes": "src\\resources\\attributes",
+    "valueConverters": "src\\resources\\value-converters",
+    "bindingBehaviors": "src\\resources\\binding-behaviors"
+  },
+  "testFramework": {
+    "id": "jasmine",
+    "displayName": "Jasmine"
+  },
+  "build": {
+    "targets": [
+      {
+        "id": "web",
+        "displayName": "Web",
+        "output": "scripts",
+        "index": "index.html"
+      }
+    ],
+    "loader": {
+      "type": "require",
+      "configTarget": "vendor-bundle.js",
+      "includeBundleMetadataInConfig": "auto",
+      "plugins": [
+        {
+          "name": "text",
+          "extensions": [
+            ".html",
+            ".css"
+          ],
+          "stub": false
+        }
+      ]
+    },
+    "options": {
+      "minify": "stage & prod",
+      "sourcemaps": "dev & stage"
+    },
+    "bundles": [
+      {
+        "name": "app-bundle.js",
+        "source": [
+          "[**/*.js]",
+          "**/*.{css,html}"
+        ]
+      },
+      {
+        "name": "vendor-bundle.js",
+        "prepend": [
+          "node_modules/bluebird/js/browser/bluebird.core.js",
+          "scripts/require.js"
+        ],
+        "dependencies": [
+          "aurelia-binding",
+          "aurelia-bootstrapper",
+          "aurelia-dependency-injection",
+          "aurelia-event-aggregator",
+          "aurelia-framework",
+          "aurelia-history",
+          "aurelia-history-browser",
+          "aurelia-loader",
+          "aurelia-loader-default",
+          "aurelia-logging",
+          "aurelia-logging-console",
+          "aurelia-metadata",
+          "aurelia-pal",
+          "aurelia-pal-browser",
+          "aurelia-path",
+          "aurelia-polyfills",
+          "aurelia-route-recognizer",
+          "aurelia-router",
+          "aurelia-task-queue",
+          "aurelia-templating",
+          "aurelia-templating-binding",
+          {
+            "name": "text",
+            "path": "../scripts/text"
+          },
+          {
+            "name": "aurelia-templating-resources",
+            "path": "../node_modules/aurelia-templating-resources/dist/amd",
+            "main": "aurelia-templating-resources"
+          },
+          {
+            "name": "aurelia-templating-router",
+            "path": "../node_modules/aurelia-templating-router/dist/amd",
+            "main": "aurelia-templating-router"
+          },
+          {
+            "name": "aurelia-testing",
+            "path": "../node_modules/aurelia-testing/dist/amd",
+            "main": "aurelia-testing",
+            "env": "dev"
+          },
+          {
+              "name": "hammerjs",
+              "path": "../node_modules/hammerjs/",
+              "main": "hammer"
+          },
+          {
+              "name": "hammer-timejs",
+              "path": "../node_modules/hammer-timejs/",
+              "main": "hammer-time"
+          },
+          {
+              "name": "aurelia-hammer",
+              "path": "../node_modules/aurelia-hammer/dist/amd",
+              "main": "index"
+          },         
+          {
+              "name":"numeral",
+              "path": "../node_modules/numeral",
+              "main": "numeral"
+          },
+          {
+              "name": "aurelia-validation",
+              "path": "../node_modules/aurelia-validation/dist/amd",
+              "main": "aurelia-validation"
+          },
+          {
+              "name": "$",
+              "path": "../node_modules/jquery/dist/",
+              "main": "jquery"
+          },
+          {
+              "name": "underscore",
+              "path": "../node_modules/underscore/",
+              "main": "underscore"
+          },
+          {
+              "name": "jquery.hammerjs",
+              "path": "../node_modules/jquery-hammerjs/",
+              "main": "jquery.hammer"
+          },
+          {
+              "name": "Papa",
+              "path": "../node_modules/papaparse/",
+              "main": "papaparse"
+          }
+        ]
+      },
+      {
+          "name": "materialize-bundle.js",
+          "dependencies": [
+            "jquery",
+            {
+              "name": "materialize-css",
+              "path": "../node_modules/materialize-css/dist",
+              "main": "js/materialize.amd",
+              "deps": [
+                "jquery"
+              ],
+              "resources": [
+                "css/materialize.css"
+              ],
+              "exports": "Materialize"
+            },
+            {
+                "name": "jquery.hammerjs",
+                "path": "../node_modules/jquery-hammerjs/",
+                "main": "jquery.hammer"
+            },
+            
+            {
+              "name": "aurelia-materialize-bridge",
+              "path": "../node_modules/aurelia-materialize-bridge/dist/amd",
+              "main": "index",
+              "deps": [
+                "jquery"
+              ],
+              "resources": [
+                "breadcrumbs/breadcrumbs.css",
+                "breadcrumbs/breadcrumbs.html",
+                "card/card.css",
+                "card/card.html",
+                "carousel/carousel-item.html",
+                "carousel/carousel.css",
+                "carousel/carousel.html",
+                "checkbox/checkbox.html",
+                "chip/chip.css",
+                "chip/chip.html",
+                "collection/collection-header.css",
+                "collection/collection-header.html",
+                "collection/collection-item.css",
+                "collection/collection-item.html",
+                "collection/collection.html",
+                "collection/md-collection-selector.css",
+                "collection/md-collection-selector.html",
+                "colors/md-colors.html",
+                "dropdown/dropdown-element.html",
+                "fab/fab.html",
+                "file/file.html",
+                "input/input.css",
+                "input/input.html",
+                "navbar/navbar.css",
+                "navbar/navbar.html",
+                "pagination/pagination.html",
+                "progress/progress.html",
+                "radio/radio.html",
+                "range/range.css",
+                "range/range.html",
+                "sidenav/sidenav.css",
+                "sidenav/sidenav.html",
+                "slider/slider.css",
+                "switch/switch.css",
+                "switch/switch.html",
+                "well/md-well.html"
+              ]
+            }
+          ]
+        }
+    ]
+  }
+}
